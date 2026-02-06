@@ -1,0 +1,112 @@
+/* Custom Alert UI Styles */
+
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Start from top as in the screenshot */
+    padding-top: 50px;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.custom-alert-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom-alert-box {
+    background: #222222;
+    color: #ffffff;
+    width: 380px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.custom-alert-overlay.active .custom-alert-box {
+    transform: translateY(0);
+}
+
+.custom-alert-header {
+    background: #2a2a2a;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #cccccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-alert-body {
+    padding: 25px 20px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.custom-alert-footer {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid #333;
+}
+
+.custom-alert-btn {
+    padding: 8px 25px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.custom-alert-btn-primary {
+    background: #4A90E2;
+    /* Matches the blue in the screenshot */
+    color: white;
+}
+
+.custom-alert-btn-primary:hover {
+    background: #357abd;
+}
+
+.custom-alert-btn-secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+.custom-alert-btn-secondary:hover {
+    background: #333;
+    border-color: #555;
+}
+
+.alert-title {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+/* Specific types */
+.custom-alert-box.success .custom-alert-btn-primary {
+    background: #006D77;
+}
+
+.custom-alert-box.error .custom-alert-btn-primary {
+    background: #d9534f;
+}

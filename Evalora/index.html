@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="notifications.css">
+  <script src="JavaScripts/script.js"></script>
+  <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+  <title>Landingpage</title>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="navbar-left">
+      <img src="photos/Evaloralogo.png" alt="Evaloralogo" width="70px">
+    </div>
+
+    <div class="navbar-center">
+      <a href="index.html" class="active">Home</a>
+      <a href="login.html">Profile</a>
+      <a href="opport(without acc).html">Opportunities</a>
+      <a href="#about-section">About</a>
+
+    </div>
+
+    <div class="navbar-right">
+      <a href="login.html">
+        <button>Login</button></a>
+    </div>
+  </div>
+
+  <div class="Background-image">
+    <div class="hero-text">
+      <h1><span>Evalora</span> - Linking talent with opportunity</h1>
+      <p>Evalora bridges the gap between your skills and the opportunities you deserve.</p>
+      <button onclick="openRegisterPopup()">Register</button></a>
+
+    </div>
+  </div>
+
+  <!-- Register Options Popup -->
+  <div id="registerPopup" class="popup-overlay">
+    <div class="popup-box">
+      <h2>Select account type</h2>
+
+      <button class="popup-btn" onclick="window.location.href='register.html'">
+        Register as Student
+      </button>
+
+      <button class="popup-btn" onclick="openCompanyPopup()">
+        Register as Company
+      </button>
+
+      <span class="close-popup" onclick="closeRegisterPopup()">&times;</span>
+    </div>
+  </div>
+
+  <!-- Company Registration Popup -->
+  <div id="companyPopup" class="popup-overlay">
+    <div class="popup-box company-box">
+
+      <span class="close-popup" onclick="closeCompanyPopup()">&times;</span>
+
+      <h2>Register as Company</h2>
+
+      <p class="popup-desc">
+        Please fill in your company details.
+        Your account will remain <strong>inactive</strong> until the admin verifies it.
+      </p>
+
+      <label>Company Name</label>
+      <input type="text" id="compName" placeholder="Enter company name">
+
+      <label>Company Email</label>
+      <input type="email" id="compEmail" placeholder="example@company.com">
+
+      <label>Password</label>
+      <input type="password" id="compPassword" placeholder="Enter password">
+
+      <label>Confirm Password</label>
+      <input type="password" id="compConfirmPassword" placeholder="Confirm password">
+
+      <label>Website (optional)</label>
+      <input type="url" id="compWebsite" placeholder="https://company.com">
+
+      <label>Contact Person</label>
+      <input type="text" id="compPerson" placeholder="Who manages this account?">
+
+      <div class="pending-box">
+        🔒 <strong>Important Notice:</strong><br>
+        After submitting, please send an email to
+        <strong>admin@evalora.com</strong>
+        from your official company email for verification.
+      </div>
+
+      <button class="register-btn submit-company-btn">Submit Request</button>
+    </div>
+  </div>
+
+  <!-- Toast message for company submit -->
+  <div id="companyToast" class="toast">
+    <span class="toast-icon">✅</span>
+    <span> Your company request has been sent to the admin.</span>
+  </div>
+
+
+
+  <section id="about-section" class="about">
+    <h2>About Evalora</h2>
+    <p>Evalora is an AI-powered networking platform designed for university students. <br>
+      It helps students showcase their skills, projects, and achievements, while connecting
+      them with mentors, peers, and real-world opportunities - all through a smart dynamic scoring system.
+    </p>
+  </section>
+
+  <section class="Ai_section">
+    <h2>How The AI Calculate Your Score</h2>
+  </section>
+
+  <div class="cards">
+    <div class="card">
+      <img src="photos/Skills_Removing_background.png" alt="Skills Analysis">
+      <h3>Skills Analysis</h3>
+      <p>AI checks the number and variety of skills and how well they match your field.</p>
+    </div>
+
+    <div class="card">
+      <img src="photos/Project impact.png" alt="Project Impact">
+      <h3>Project Impact</h3>
+      <p>Your completed projects and their professional impact raise your score.</p>
+    </div>
+
+    <div class="card">
+      <img src="photos/Collaboration.png" alt="Engagement">
+      <h3>Engagement & Collaboration</h3>
+      <p>The more you join groups, help others, and participate, the higher your engagement score.</p>
+    </div>
+
+    <div class="card">
+      <img src="photos/Achievement.png" alt="Achievements">
+      <h3>Achievements & Endorsements</h3>
+      <p>Endorsements, volunteering, and peer recommendations boost your overall rating.</p>
+    </div>
+  </div>
+  </section>
+
+
+  <footer class="footer">
+
+    <div class="footer-content">
+
+      <div class="footer-left">
+        <h3>Quick links</h3>
+        <ul>
+          <li><a href="#about-section">About</a></li>
+          <li><a href="opport(without acc).html">Opportunities</a></li>
+          <li><a href="FAQ.html">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-right">
+        <h3>Evalora</h3>
+        <img src="photos/Evaloralogo.png" alt="Evalora Logo" width="70px">
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Evalora. All Rights Reserved.</p>
+    </div>
+
+  </footer>
+  <script src="js/api.js"></script>
+  <script src="JavaScripts/index.js"></script>
+</body>
+
+</html>

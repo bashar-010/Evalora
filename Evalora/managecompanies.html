@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+    <title>Manage Companies</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="managestudent.css">
+    <link rel="stylesheet" href="custom-alert.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <nav class="nav-icons">
+            <div class="nav-icon">
+                <a href="dashboard.html">
+                    <img src="photos/dashboard.png" alt="dashboard" width="30px">
+                </a>
+            </div>
+            <div class="nav-icon">
+                <a href="settings.html">
+                    <img src="photos/settings.svg" alt="settings" width="30px">
+                </a>
+            </div>
+            <div class="nav-icon">
+                <a href="notifications_center.html">
+                    <img src="photos/notification.png" alt="Notifications" width="30px">
+                </a>
+            </div>
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="nav-icon">
+                <a href="account.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="7" r="4" stroke="white" stroke-width="2" />
+                        <path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2" stroke="white" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg></a>
+            </div>
+            <div class="nav-icon" id="logoutBtn" style="cursor:pointer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4m7 14l5-5-5-5m5 5H9" stroke="white" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <h1>Manage Companies</h1>
+
+            <div class="filters">
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search by name or email..."
+                        oninput="applySearch()">
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Email</th>
+                            <th>Website</th>
+                            <th>Contact Person</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="companiesTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- Close main-content -->
+
+    <!-- Modal -->
+    <div id="companyModal" class="modal"
+        style="display:none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-content"
+            style="background-color: white; margin: 10% auto; padding: 20px; border-radius: 12px; width: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+            <div class="modal-header"
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>Add Company</h2>
+                <button onclick="closeModal()"
+                    style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+            </div>
+            <form id="companyForm">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Company Name *</label>
+                    <input type="text" id="compName" required
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Email *</label>
+                    <input type="email" id="compEmail" required
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Password *</label>
+                    <input type="password" id="compPassword" required
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Website</label>
+                    <input type="text" id="compWebsite"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Contact Person</label>
+                    <input type="text" id="compContact"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div style="text-align: right; margin-top: 20px;">
+                    <button type="button" onclick="closeModal()"
+                        style="padding: 10px 20px; margin-right: 10px; border: none; border-radius: 6px; cursor: pointer;">Cancel</button>
+                    <button type="submit"
+                        style="padding: 10px 20px; background-color: #0d4f5c; color: white; border: none; border-radius: 6px; cursor: pointer;">Save
+                        Company</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="js/custom-alert.js"></script>
+    <script src="js/api.js"></script>
+    <script src="JavaScripts/managecompanies.js"></script>
+    <script src="JavaScripts/forceBackToHome.js"></script>
+</body>
+
+</html>

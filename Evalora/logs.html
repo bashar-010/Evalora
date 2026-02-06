@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Logs Dashboard</title>
+    <link rel="stylesheet" href="logs.css">
+    <link rel="stylesheet" href="custom-alert.css">
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <!-- Updated General button to link to index.html -->
+                <a href="settings.html" class="nav-item" data-section="general">
+                    <img src="photos/settingg.svg" alt="settings" width="25px">
+                    General
+                </a>
+                <!-- Updated Roles button to link to roles.html -->
+                <a href="roles.html" class="nav-item" data-section="roles">
+                    <img src="photos/roles.png" alt="" width="25px">
+                    Roles
+                </a>
+                <a href="notifications.html" class="nav-item" data-section="notifications">
+                    <img src="photos/notificationnn.png" alt="" width="25px">
+
+                    Notifications
+                </a>
+                <a href="logs.html" class="nav-item active" data-section="logs">
+                    <img src="photos/logs.svg" alt="" width="25px">
+                    Logs
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a href="account.html" class="nav-item" data-section="account">
+                    <img src="photos/account.png" alt="" width="25px">
+                    Account
+                </a>
+                <button class="nav-item logout" id="logoutBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Logout
+                </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1>Audit Logs</h1>
+                <button class="btn-export" onclick="exportCSV()">Export CSV</button>
+            </div>
+
+            <div class="filters">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                    <input type="text" placeholder="Search logs..." id="searchInput">
+                </div>
+                <select class="filter-select" id="dateFilter">
+                    <option>All Dates</option>
+                    <option>Today</option>
+                    <option>Last 7 Days</option>
+                    <option>Last 30 Days</option>
+                </select>
+                <select class="filter-select" id="actionFilter">
+                    <option>All Actions</option>
+                    <option>AI Chatbot</option>
+                    <option>Python Bootcamp</option>
+                </select>
+            </div>
+
+            <div class="table-container">
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Date</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="auditTableBody">
+                        <tr>
+                            <td>Reem</td>
+                            <td>AI Chatbot</td>
+                            <td>Mar 15, 2025</td>
+                            <td>Deadline changed 12/20 → 12/25</td>
+                        </tr>
+                        <tr>
+                            <td>Sara</td>
+                            <td>Python Bootcamp</td>
+                            <td>Mar 15, 2025</td>
+                            <td>Status: Pending → Approved</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="empty-message">No activity yet. Actions will appear here</p>
+            </div>
+        </main>
+    </div>
+
+
+    <script src="js/custom-alert.js"></script>
+    <script src="js/api.js"></script>
+    <script src="JavaScripts/logs.js"></script>
+    <script src="JavaScripts/forceBackToHome.js"></script>
+</body>
+
+</html>

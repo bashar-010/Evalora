@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Project - Evalora</title>
+    <link rel="stylesheet" href="verify-project.css">
+    <link rel="stylesheet" href="custom-alert.css">
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <h1>EVALORA</h1>
+            </div>
+        </div>
+
+        <div class="content" id="mainContent">
+            <div class="loading" id="loadingState">
+                <div class="spinner"></div>
+                <p>Loading project details...</p>
+            </div>
+
+            <div class="error-state" id="errorState" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <h2>Verification Error</h2>
+                <p id="errorMessage">Unable to load project details</p>
+            </div>
+
+            <div class="verification-form" id="verificationForm" style="display: none;">
+                <div class="verification-header">
+                    <h2>🔍 Project Verification Request</h2>
+                    <p>A student has submitted a project claiming it was completed for your company. Please review and
+                        verify.</p>
+                </div>
+
+                <div class="project-details">
+                    <h3>Project Information</h3>
+                    <div class="detail-row">
+                        <span class="label">Project Title:</span>
+                        <span class="value" id="projectTitle">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Submitted By:</span>
+                        <span class="value" id="studentName">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Student Email:</span>
+                        <span class="value" id="studentEmail">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Company:</span>
+                        <span class="value" id="companyName">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Submission Date:</span>
+                        <span class="value" id="submissionDate">-</span>
+                    </div>
+
+                    <div class="detail-section">
+                        <span class="label">Description:</span>
+                        <p class="description" id="projectDescription">-</p>
+                    </div>
+
+                    <div class="detail-section" id="repoSection" style="display: none;">
+                        <span class="label">Repository:</span>
+                        <a href="#" id="repoLink" target="_blank" class="repo-link">View Repository</a>
+                    </div>
+
+                    <div class="detail-section" id="techSection" style="display: none;">
+                        <span class="label">Technologies:</span>
+                        <div class="tech-tags" id="techTags"></div>
+                    </div>
+                </div>
+
+                <div class="verification-actions">
+                    <h3>Your Decision</h3>
+
+                    <div class="feedback-section">
+                        <label for="feedback">Feedback (Optional)</label>
+                        <textarea id="feedback" rows="4"
+                            placeholder="Enter your feedback or comments about this project..."></textarea>
+                    </div>
+
+                    <div class="score-section">
+                        <label for="score">Score (Optional, 0-100)</label>
+                        <input type="number" id="score" min="0" max="100" placeholder="Enter score if applicable">
+                        <small>You can optionally provide a score for this project</small>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-verify" id="verifyBtn" onclick="handleVerification(true)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M20 6L9 17l-5-5" />
+                            </svg>
+                            Verify Project
+                        </button>
+                        <button class="btn btn-reject" id="rejectBtn" onclick="handleVerification(false)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M18 6L6 18M6 6l12 12" />
+                            </svg>
+                            Reject Project
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-state" id="successState" style="display: none;">
+                <div class="success-icon">✓</div>
+                <h2 id="successTitle">Verification Complete</h2>
+                <p id="successMessage">Thank you for your response.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/custom-alert.js"></script>
+    <script src="js/api.js"></script>
+    <script src="JavaScripts/verify-project.js"></script>
+</body>
+
+</html>

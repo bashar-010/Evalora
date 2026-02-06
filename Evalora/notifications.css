@@ -1,0 +1,381 @@
+/* Notifications CSS - Premium Glassmorphism Design */
+
+.notification-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+.notif-bell {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #006D77;
+    padding: 5px;
+    position: relative;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notif-bell:hover {
+    transform: scale(1.1);
+}
+
+.notif-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #f44336;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: none;
+    /* Shown via JS */
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #E0EEEE;
+}
+
+/* Dropdown Menu */
+.notif-dropdown {
+    position: absolute;
+    top: 45px;
+    right: -10px;
+    width: 320px;
+    max-height: 400px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: none;
+    /* Toggled via JS */
+    flex-direction: column;
+    z-index: 1001;
+    overflow: hidden;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.notif-header {
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notif-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #006D77;
+}
+
+.mark-read-btn {
+    background: none;
+    border: none;
+    color: #006D77;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.notif-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+}
+
+.notif-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;
+    gap: 12px;
+}
+
+.notif-item:hover {
+    background: rgba(0, 109, 119, 0.05);
+}
+
+.notif-item.unread {
+    background: rgba(0, 109, 119, 0.02);
+    border-left: 3px solid #006D77;
+}
+
+.notif-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+}
+
+.notif-icon.opportunity {
+    background: #e3f2fd;
+    color: #2196f3;
+}
+
+.notif-icon.social {
+    background: #fce4ec;
+    color: #e91e63;
+}
+
+.notif-icon.system {
+    background: #f1f8e9;
+    color: #4caf50;
+}
+
+.notif-content {
+    flex: 1;
+}
+
+.notif-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.notif-message {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.notif-time {
+    font-size: 10px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.notif-empty {
+    padding: 30px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
+
+/* Detail Modal Overlay */
+.notif-detail-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    display: none;
+    /* Shown via JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.notif-detail-modal {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    animation: modalBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalBounce {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.notif-detail-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+}
+
+.notif-detail-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+    display: inline-block;
+    padding: 15px;
+    border-radius: 50%;
+}
+
+.notif-detail-title {
+    font-size: 22px;
+    color: #006D77;
+    margin-bottom: 15px;
+}
+
+.notif-detail-message {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.notif-detail-footer {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.notif-btn {
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.notif-btn-primary {
+    background: #006D77;
+    color: white;
+}
+
+.notif-btn-primary:hover {
+    background: #004F52;
+    transform: translateY(-2px);
+}
+
+.notif-btn-secondary {
+    background: #f0f4f4;
+    color: #006D77;
+}
+
+.notif-btn-secondary:hover {
+    background: #e0eaea;
+}
+
+/* Global Logout Modal Styles */
+.logout-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    animation: fadeIn 0.3s ease;
+}
+
+.logout-modal-overlay.active {
+    display: flex;
+}
+
+.logout-modal {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: modalBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.logout-modal-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #DC2626;
+}
+
+.logout-modal-title {
+    font-size: 22px;
+    color: #006D77;
+    margin-bottom: 10px;
+}
+
+.logout-modal-message {
+    font-size: 16px;
+    color: #4B5563;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.logout-modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.logout-btn-action {
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.logout-btn-confirm {
+    background: #DC2626;
+    color: white;
+}
+
+.logout-btn-confirm:hover {
+    background: #B91C1C;
+    transform: translateY(-2px);
+}
+
+.logout-btn-cancel {
+    background: #F3F4F6;
+    color: #4B5563;
+}
+
+.logout-btn-cancel:hover {
+    background: #E5E7EB;
+}

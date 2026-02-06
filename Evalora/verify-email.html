@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email - Evalora</title>
+    <link rel="stylesheet" href="custom-alert.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #006D77 0%, #83c8c8ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .verification-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            color: #006D77;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .email-display {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .email-display strong {
+            color: #006D77;
+        }
+
+        .code-inputs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .code-input {
+            width: 60px;
+            height: 70px;
+            font-size: 32px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #006D77;
+            transition: all 0.3s;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: #006D77;
+            box-shadow: 0 0 0 3px rgba(0, 109, 119, 0.1);
+        }
+
+        .verify-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #006D77, #83c8c8ff);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .verify-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .verify-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .resend-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .resend-text {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .resend-btn {
+            background: none;
+            border: none;
+            color: #006D77;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .resend-btn:hover {
+            color: #004F52;
+        }
+
+        .timer {
+            color: #999;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+</head>
+
+<body>
+    <div class="verification-container">
+        <div class="logo">EVALORA</div>
+        <h1>Verify Your Email</h1>
+        <p class="email-display">We sent a verification code to<br><strong id="emailDisplay"></strong></p>
+
+        <div class="code-inputs">
+            <input type="text" class="code-input" maxlength="1" id="code1" autofocus>
+            <input type="text" class="code-input" maxlength="1" id="code2">
+            <input type="text" class="code-input" maxlength="1" id="code3">
+            <input type="text" class="code-input" maxlength="1" id="code4">
+        </div>
+
+        <button class="verify-btn" id="verifyBtn">Verify Email</button>
+
+        <div class="resend-section">
+            <p class="resend-text">Didn't receive the code?</p>
+            <button class="resend-btn" id="resendBtn">Resend Code</button>
+            <p class="timer" id="timer"></p>
+        </div>
+    </div>
+
+    <script src="js/custom-alert.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        const email = sessionStorage.getItem('verificationEmail');
+        if (!email) {
+            window.location.href = 'login.html';
+        }
+
+        document.getElementById('emailDisplay').textContent = email;
+
+        // Auto-focus next input
+        const inputs = document.querySelectorAll('.code-input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Verify button
+        document.getElementById('verifyBtn').addEventListener('click', async () => {
+            const code = Array.from(inputs).map(input => input.value).join('');
+
+            if (code.length !== 4) {
+                await showAlert('Please enter the 4-digit code', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/users/verify-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, code })
+                });
+
+                const data = await response.json();
+                console.log('Verification response:', data); // Debug log
+
+                if (response.ok) {
+                    await showAlert(data.message, 'success');
+                    sessionStorage.removeItem('verificationEmail');
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1500);
+                } else {
+                    await showAlert(data.message || 'Verification failed', 'error');
+                }
+            } catch (error) {
+                console.error('Verification error:', error); // Debug log
+                await showAlert(error.message || 'Verification failed. Please try again.', 'error');
+            }
+        });
+
+        // Resend button
+        let canResend = true;
+        let countdown = 0;
+
+        document.getElementById('resendBtn').addEventListener('click', async () => {
+            if (!canResend) return;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/users/resend-verification', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    await showAlert(data.message, 'success');
+
+                    // Start cooldown
+                    canResend = false;
+                    countdown = 60;
+                    updateTimer();
+                } else {
+                    await showAlert(data.message, 'error');
+                }
+            } catch (error) {
+                await showAlert('Failed to resend code. Please try again.', 'error');
+            }
+        });
+
+        function updateTimer() {
+            const timerEl = document.getElementById('timer');
+            const resendBtn = document.getElementById('resendBtn');
+
+            if (countdown > 0) {
+                timerEl.textContent = `Resend available in ${countdown}s`;
+                resendBtn.disabled = true;
+                resendBtn.style.opacity = '0.5';
+                countdown--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                timerEl.textContent = '';
+                resendBtn.disabled = false;
+                resendBtn.style.opacity = '1';
+                canResend = true;
+            }
+        }
+    </script>
+</body>
+
+</html>

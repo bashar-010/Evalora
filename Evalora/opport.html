@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Opportunities - Evalora</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="opport.css">
+    <link rel="stylesheet" href="notifications.css">
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="photos/Evaloralogo.png" width="70px">
+        </div>
+
+        <div class="navbar-center" id="navbarCenter">
+            <!-- Dynamic Role-Based Navigation -->
+        </div>
+
+        <div class="navbar-right">
+            <a href="login.html"><button class="nav-Logout">Logout</button></a>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <h1>Find Opportunities Tailored For You</h1>
+            <p>Explore internships, scholarships, and competitions that match your profile and skills.</p>
+
+            <!-- Filter Button -->
+            <button id="filterBtn" class="filter-btn">
+                <img src="photos/filter.png" alt="">
+            </button>
+
+            <!-- FILTER PANEL -->
+            <div id="filterPanel" class="filter-panel">
+
+                <div class="filter-item">
+                    <button class="filter-title">Type ▾</button>
+                    <div class="filter-options" id="filterOptionsType">
+                        <!-- Dynamic -->
+                    </div>
+                </div>
+
+                <div class="filter-item">
+                    <button class="filter-title">Work Mode ▾</button>
+                    <div class="filter-options" id="filterOptionsStatus">
+                        <!-- Dynamic -->
+                    </div>
+                </div>
+
+                <div class="filter-item">
+                    <button class="filter-title">Location ▾</button>
+                    <div class="filter-options" id="filterOptionsLocation">
+                        <!-- Dynamic -->
+                    </div>
+                </div>
+
+
+                <div class="filter-actions">
+                    <button class="clear-filters">Clear Filters</button>
+                    <button class="apply-filters">Apply Filters</button>
+                </div>
+
+            </div>
+
+            <div id="filterOverlay" class="filter-overlay"></div>
+
+        </div>
+    </section>
+
+    <!-- OPPORTUNITY DETAILS MODAL -->
+    <div id="opportunityModal" class="opportunity-modal">
+        <div class="modal-overlay" onclick="closeOpportunityModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeOpportunityModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" />
+                </svg>
+            </button>
+
+            <h2 class="modal-title">Opportunity details</h2>
+
+            <div class="modal-header">
+                <div class="modal-company-logo" id="modalLogo"></div>
+                <div class="modal-header-info">
+                    <h3 id="modalJobTitle">Web Development Internship</h3>
+                    <p class="modal-deadline" id="modalDeadline">Apply before Dec 10, 2025</p>
+
+                    <!-- Company Feedback Section (Visible only if accepted/rejected with message) -->
+                    <div id="companyFeedbackSection" class="feedback-box">
+                        <div class="feedback-header">Company Feedback:</div>
+                        <p id="modalFeedbackText" class="feedback-text"></p>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button class="modal-apply-btn">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-info-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="info-item">
+                    <h4>Location</h4>
+                    <p id="modalLocation">Amman (on-site)</p>
+                </div>
+                <div class="info-item">
+                    <h4>Type</h4>
+                    <p id="modalType">Internship</p>
+                </div>
+                <div class="info-item">
+                    <h4>Duration</h4>
+                    <p id="modalDuration">3 Months</p>
+                </div>
+                <div class="info-item">
+                    <h4>AI Match</h4>
+                    <p id="modalMatchScore">0%</p>
+                </div>
+            </div>
+
+            <!-- Why this match section -->
+            <div id="whyMatchSection" class="modal-section"
+                style="display: none; background: #fffcf0; padding: 15px; border-radius: 12px; border: 1px solid #f8e8b0;">
+                <h3 style="color: #c9a236; margin-bottom: 8px; font-size: 1rem;">🤖 Why this match?</h3>
+                <ul id="modalMatchReasons" style="margin: 0; padding-left: 20px; font-size: 0.85rem; color: #555;">
+                </ul>
+            </div>
+
+
+            <div class="modal-section">
+                <h3>About this Opportunity</h3>
+                <p id="modalAbout">
+                    Build cutting-edge web applications using modern technologies. You will work with senior developers,
+                    gain hands-on experience, and collaborate on real client projects.
+                </p>
+            </div>
+
+            <div class="modal-section">
+                <h3>Required Skills</h3>
+                <p id="modalSkills">HTML, CSS, JavaScript, Git, Communication Skills</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>What You Will Do</h3>
+                <ol id="modalResponsibilities">
+                    <li>Assist in building responsive web pages</li>
+                    <li>Fix bugs and improve user experience</li>
+                    <li>Collaborate in daily stand-up meetings</li>
+                    <li>Write clean and maintainable code</li>
+                </ol>
+            </div>
+
+            <div class="modal-section">
+                <h3 id="modalCompanyTitle">About Orange Jordan</h3>
+                <p id="modalCompanyDesc">
+                    Orange Jordan is a leading telecom company focused on providing innovative digital solutions and
+                    excellent customer service.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPPORTUNITIES -->
+    <section class="opportunities">
+        <div class="container">
+            <h2 class="section-title">Latest Opportunities</h2>
+
+            <div class="carousel-wrapper">
+                <button class="carousel-nav prev" onclick="scrollCarousel('carousel1', -1)">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" />
+                    </svg>
+                </button>
+
+                <div class="carousel" id="carousel1">
+                    <!-- CARD 1 -->
+                    <div class="card"
+                        onclick="openOpportunityModal('orange', 'Web Development Internship', 'Apply before Mar 15, 2025', 'Amman (on-site)', 'Internship', '3 Months', 'Beginner', 'Join our team to build innovative website and applications.', 'HTML, CSS, JavaScript, Git, Communication Skills', 'Assist in building responsive web pages\nFix bugs and improve user experience\nCollaborate in daily stand-up meetings\nWrite clean and maintainable code', 'Orange Jordan', 'Orange Jordan is a leading telecom company focused on providing innovative digital solutions and excellent customer service.')">
+                        <div class="card-logo orange">orange</div>
+                        <h3>Web Development Internship</h3>
+                        <p class="deadline">Apply before Mar 15, 2025</p>
+                        <p class="description">Join our team to build innovative website and applications.</p>
+                        <span class="badge">Recommended for you: 87% Match</span>
+                        <button class="btn-details">View Details →</button>
+                    </div>
+
+                    <!-- CARD 2 -->
+                    <div class="card"
+                        onclick="openOpportunityModal('microsoft', 'AI Residency Program', 'Apply before Dec 31, 2025', 'Not specified', 'Residency Program', '1 Year', 'Intermediate', 'A one-year AI training program for passionate students.', 'Machine Learning, Data Analysis, Python', 'Attend lectures and workshops\nComplete projects\nParticipate in hackathons\nPresent findings', 'Microsoft', 'Microsoft is a global leader in technology, cloud services, and software solutions.')">
+                        <div class="card-logo microsoft">
+                            <div class="ms-square red"></div>
+                            <div class="ms-square green"></div>
+                            <div class="ms-square blue"></div>
+                            <div class="ms-square yellow"></div>
+                        </div>
+                        <h3>AI Residency Program</h3>
+                        <p class="deadline">Apply before Dec 31, 2025</p>
+                        <p class="description">A one-year AI training program for passionate students.</p>
+                        <span class="badge">Recommended for you: 87% Match</span>
+                        <button class="btn-details">View Details →</button>
+                    </div>
+
+                    <!-- CARD 3 -->
+                    <div class="card"
+                        onclick="openOpportunityModal('orange-ux', 'UX Design Challenge', 'Apply before Feb 20, 2025', 'Remote', 'Challenge', '2 Weeks', 'Advanced', 'Create innovative user experiences.', 'UI/UX Design, Wireframing, Prototyping', 'Design user interfaces\nConduct usability testing\nCreate prototypes\nPresent design concepts', 'Orange Jordan', 'Orange Jordan is a leading telecom company focused on providing innovative digital solutions and excellent customer service.')">
+                        <div class="card-logo orange-ux">UX</div>
+                        <h3>UX Design Challenge</h3>
+                        <p class="deadline">Apply before Feb 20, 2025</p>
+                        <p class="description">Create innovative user experiences.</p>
+                        <span class="badge">Recommended for you: 92% Match</span>
+                        <button class="btn-details">View Details →</button>
+                    </div>
+                </div>
+
+                <button class="carousel-nav next" onclick="scrollCarousel('carousel1', 1)">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI RECOMMENDATIONS -->
+    <section class="recommendations">
+        <div class="container">
+            <h2>AI-Powered Recommendations</h2>
+
+            <div class="carousel-wrapper">
+                <button class="carousel-nav prev" onclick="scrollCarousel('carousel2', -1)">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" />
+                    </svg>
+                </button>
+
+                <div class="carousel" id="carousel2">
+                    <div class="card"
+                        onclick="openOpportunityModal('python', 'Python Bootcamp', 'Apply before Mar 1, 2025', 'Online', 'Bootcamp', '3 Months', 'Beginner', 'Learn Python with practical projects.', 'Python, Data Structures, Algorithms', 'Complete coding exercises\nBuild projects\nAttend workshops\nReceive feedback', 'Python Institute', 'Python Institute offers comprehensive training programs in Python and related technologies.')">
+                        <div class="card-logo python">
+                            <div class="py-icon"></div>
+                        </div>
+                        <h3>Python Bootcamp</h3>
+                        <p class="deadline">Apply before Mar 1, 2025</p>
+                        <p class="description">Learn Python with practical projects.</p>
+                        <span class="badge">Recommended for you: 93% Match</span>
+                        <button class="btn-details">View Details →</button>
+                    </div>
+
+                    <div class="card"
+                        onclick="openOpportunityModal('google', 'Software Engineering Internship', 'Apply before Mar 1, 2025', 'Mountain View, CA', 'Internship', '6 Months', 'Intermediate', 'Gain real-world engineering experience.', 'Java, C++, Algorithms, Git', 'Develop software solutions\nWork on real projects\nParticipate in code reviews\nLearn from experienced engineers', 'Google', 'Google is a global leader in internet search and technology services.')">
+                        <div class="card-logo google">G</div>
+                        <h3>Software Engineering Internship</h3>
+                        <p class="deadline">Apply before Mar 1, 2025</p>
+                        <p class="description">Gain real-world engineering experience.</p>
+                        <span class="badge">Recommended for you: 94% Match</span>
+                        <button class="btn-details">View Details →</button>
+                    </div>
+                </div>
+
+                <button class="carousel-nav next" onclick="scrollCarousel('carousel2', 1)">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <h3>Quick links</h3>
+                <ul>
+                    <li><a href="index.html#about-section">About</a></li>
+                    <li><a href="opport.html">Opportunities</a></li>
+                    <li><a href="FAQ.html">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-right">
+                <h3>Evalora</h3>
+                <img src="photos/Evaloralogo.png" width="70px">
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Evalora. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/api.js"></script>
+    <script src="JavaScripts/navigation.js"></script>
+    <script src="JavaScripts/opport.js"></script>
+    <script src="JavaScripts/forceBackToHome.js"></script>
+
+</body>
+
+</html>

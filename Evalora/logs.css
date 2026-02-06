@@ -1,0 +1,358 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #333;
+    background-color: white;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 240px;
+    background-color: #fff;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 12px;
+}
+
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 12px;
+    margin-top: auto;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    padding: 14px 16px;
+    border: none;
+    background: none;
+    color: #006D77;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+    width: 100%;
+    text-align: left;
+}
+
+.nav-item:hover {
+    background-color: #f0f8f9;
+}
+
+.nav-item.active {
+    background-color: #d4ebee;
+    color: #006D77;
+}
+
+.nav-item.logout {
+    color: #006D77;
+}
+
+.nav-item svg {
+    flex-shrink: 0;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background-color: white;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 32px;
+    color: #006D77;
+    font-weight: 600;
+}
+
+.btn-export {
+    background-color: #006D77;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-export:hover {
+    background-color: #0e7490;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    stroke: #999;
+    stroke-width: 2;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 12px 10px 40px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-box input:focus {
+    border-color: #006D77;
+}
+
+.filter-select {
+    padding: 10px 35px 10px 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #006D77;
+    background-color: white;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230891b2' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.filter-select:hover,
+.filter-select:focus {
+    border-color: #006D77;
+}
+
+/* Table Styles */
+.table-container {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.audit-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.audit-table thead {
+    background-color: #006D77;
+    color: white;
+}
+
+.audit-table th {
+    text-align: left;
+    padding: 16px 20px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.audit-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.audit-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.audit-table td {
+    padding: 18px 20px;
+    font-size: 14px;
+    color: #006D77;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #006D77;
+    font-size: 15px;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal-overlay.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-title {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.modal-message {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.btn-cancel {
+    background-color: #e5e5e5;
+    color: #333;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+    background-color: #d4d4d4;
+}
+
+.btn-confirm {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-confirm:hover {
+    background-color: #c82333;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .search-box {
+        max-width: 100%;
+    }
+
+    .audit-table {
+        font-size: 12px;
+    }
+
+    .audit-table th,
+    .audit-table td {
+        padding: 12px 10px;
+    }
+}

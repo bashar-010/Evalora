@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+    <title>Manage Students</title>
+    <link rel="stylesheet" href="managestudent.css">
+    <link rel="stylesheet" href="custom-alert.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Manage Students</h1>
+
+        <div class="filters">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search by name or email..."
+                    oninput="applyFilters()">
+            </div>
+
+            <select id="filterUniversity" onchange="applyFilters()">
+                <option value="">All Universities</option>
+                <option value="University of Jordan">University of Jordan</option>
+                <option value="Jordan University of Science and Technology">Jordan University of Science and Technology
+                </option>
+                <option value="Princess Sumaya University">Princess Sumaya University</option>
+                <option value="German Jordanian University">German Jordanian University</option>
+                <option value="Hashemite University">Hashemite University</option>
+                <option value="Al-Balqa Applied University">Al-Balqa Applied University</option>
+                <option value="The wolrd islamic sciences and education university">The wolrd islamic sciences and
+                    education university</option>
+                <option value="Yarmouk University">Yarmouk University</option>
+                <option value="Petra University">Petra University</option>
+            </select>
+
+            <select id="filterMajor" onchange="applyFilters()">
+                <option value="">All Majors</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Software Engineering">Software Engineering</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Data Science">Data Science</option>
+                <option value="Artificial Intelligence">Artificial Intelligence</option>
+                <option value="Network Engineering">Network Engineering</option>
+            </select>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>University</th>
+                        <th>Major</th>
+                        <th>Joined</th>
+                        <th>Score</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTable">
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Student</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="studentForm">
+                <input type="hidden" id="studentId">
+
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="university">University *</label>
+                    <select id="university" required>
+                        <option value="">Select University</option>
+                        <option value="University of Jordan">University of Jordan</option>
+                        <option value="Jordan University of Science and Technology">Jordan University of Science and
+                            Technology</option>
+                        <option value="Princess Sumaya University">Princess Sumaya University</option>
+                        <option value="German Jordanian University">German Jordanian University</option>
+                        <option value="Hashemite University">Hashemite University</option>
+                        <option value="The world islamic sciences and education university">The wolrd islamic sciences
+                            and education University</option>
+                        <option value="Al-Balqa Applied University">Al-Balqa Applied University</option>
+                        <option value="Yarmouk University">Yarmouk University</option>
+                        <option value="Petra University">Petra University</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="major">Major *</label>
+                    <select id="major" required>
+                        <option value="">Select Major</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Artificial Intelligence">Artificial Intelligence</option>
+                        <option value="Network Engineering">Network Engineering</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="joined">Joined Date *</label>
+                    <input type="date" id="joined" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="score">Score (%) *</label>
+                    <input type="number" id="score" min="0" max="100" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-submit">Save Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Student Profile</h2>
+                <button class="close-btn" onclick="closeProfileModal()">&times;</button>
+            </div>
+            <div id="profileContent" class="profile-view">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-cancel" onclick="closeProfileModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/custom-alert.js"></script>
+    <script src="js/api.js"></script>
+    <script src="JavaScripts/managestudent.js"></script>
+    <script src="JavaScripts/forceBackToHome.js"></script>
+</body>
+
+</html>

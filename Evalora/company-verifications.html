@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+    <title>Project Verifications - Evalora</title>
+    <link rel="stylesheet" href="company-verifications.css">
+    <link rel="stylesheet" href="custom-alert.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <nav class="nav-icons">
+            <div class="nav-icon">
+                <a href="company_dashboard.html">
+                    <img src="photos/dashboard.png" alt="dashboard" width="30px">
+                </a>
+            </div>
+            <div class="nav-icon active">
+                <span style="color: #83c8c8; font-size: 24px;">✓</span>
+            </div>
+            <div class="nav-icon">
+                <a href="notifications_center.html">
+                    <img src="photos/notification.png" alt="Notifications" width="30px">
+                </a>
+            </div>
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="nav-icon">
+                <a href="account.html">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="7" r="4" stroke="white" stroke-width="2" />
+                        <path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2" stroke="white" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </a>
+            </div>
+            <div class="nav-icon" id="logoutBtn" style="cursor:pointer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4m7 14l5-5-5-5m5 5H9" stroke="white" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="page-title">Project Verifications</h1>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('pending')">Pending Verification</button>
+            <button class="tab-btn" onclick="switchTab('verified')">Verified Projects</button>
+        </div>
+
+        <!-- Pending Projects Tab -->
+        <div class="tab-content active" id="pendingTab">
+            <div class="projects-grid" id="pendingProjects">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading pending verifications...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verified Projects Tab -->
+        <div class="tab-content" id="verifiedTab">
+            <div class="projects-grid" id="verifiedProjects">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading verified projects...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verification Modal -->
+    <div class="modal" id="verificationModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+
+            <h2>Project Details</h2>
+
+            <div class="project-info" id="modalProjectInfo">
+                <!-- Project details will be injected here -->
+            </div>
+
+            <div class="verification-form" id="modalVerificationForm">
+                <h3>Verification Decision</h3>
+
+                <div class="form-group">
+                    <label for="modalFeedback">Feedback (Optional)</label>
+                    <textarea id="modalFeedback" rows="4"
+                        placeholder="Enter your feedback about this project..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="modalScore">Score (Optional, 0-100)</label>
+                    <input type="number" id="modalScore" min="0" max="100" placeholder="Enter score">
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn btn-verify" onclick="submitVerification(true)">
+                        <span>✓</span> Verify Project
+                    </button>
+                    <button class="btn btn-reject" onclick="submitVerification(false)">
+                        <span>✗</span> Reject Project
+                    </button>
+                </div>
+            </div>
+
+            <div class="score-update-form" id="modalScoreForm" style="display: none;">
+                <h3>Update Score</h3>
+
+                <div class="form-group">
+                    <label for="updateScore">Score (0-100)</label>
+                    <input type="number" id="updateScore" min="0" max="100" placeholder="Enter new score">
+                </div>
+
+                <div class="form-group">
+                    <label for="updateFeedback">Feedback (Optional)</label>
+                    <textarea id="updateFeedback" rows="4" placeholder="Update your feedback..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn btn-primary" onclick="submitScoreUpdate()">Update Score</button>
+                    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Modal -->
+    <div class="popup-overlay" id="confirmPopup">
+        <div class="popup-box">
+            <h2>Confirm Logout</h2>
+            <p>Are you sure you want to log out?</p>
+            <div class="popup-buttons">
+                <button class="popup-btn" id="yesBtn">Yes, Logout</button>
+                <button class="popup-btn cancel" id="noBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/custom-alert.js"></script>
+    <script src="JavaScripts/company-verifications.js"></script>
+    <script src="JavaScripts/forceBackToHome.js"></script>
+</body>
+
+</html>

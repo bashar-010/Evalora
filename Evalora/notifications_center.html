@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+    <title>Notification Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="notifications.css">
+    <style>
+        :root {
+            --primary-color: #006D77;
+            --secondary-color: #83c8c8ff;
+            --bg-glass: rgba(255, 255, 255, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4f4;
+            color: #2c3e50;
+        }
+
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+
+        .content-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .content-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .notifications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .notification-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .notification-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+
+        .notification-card.unread {
+            border-left: 5px solid var(--primary-color);
+            background: rgba(0, 109, 119, 0.03);
+        }
+
+        .notif-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 109, 119, 0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .notif-content {
+            flex: 1;
+        }
+
+        .notif-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .notif-message {
+            color: #5a6c7d;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .notif-time {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .delete-notif {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            font-size: 18px;
+            transition: all 0.2s;
+            opacity: 0;
+        }
+
+        .notification-card:hover .delete-notif {
+            opacity: 1;
+        }
+
+        .delete-notif:hover {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        /* Sidebar consistency with Dashboard */
+        .sidebar {
+            z-index: 1000;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+        
+        }
+
+        .nav-icon :active:hover{
+            color:#006D77 ;
+        }
+
+        .nav-icon:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 110%;
+            background: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <nav class="nav-icons" id="navMenu">
+            <!-- Will be populated by JS based on role -->
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="nav-icon" data-tooltip="Account">
+                <a href="account.html">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="7" r="4" stroke="white" stroke-width="2" />
+                        <path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2" stroke="white" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </a>
+            </div>
+            <div class="nav-icon" id="logoutBtn" style="cursor:pointer" data-tooltip="Logout">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4m7 14l5-5-5-5m5 5H9" stroke="white" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="content-header">
+            <h1>Notification Center</h1>
+            <p>Stay updated with your latest activities.</p>
+        </div>
+
+        <div class="notifications-list" id="notificationsList">
+            <div style="text-align: center; color: #94a3b8; padding: 60px;">
+                <p>Loading notifications...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Replace old Modal with the Popup Box from dashboard.css -->
+    <div class="popup-overlay" id="logoutModal">
+        <div class="popup-box">
+            <h2>Confirm Logout</h2>
+            <p>Are you sure you want to log out?</p>
+            <div class="popup-buttons">
+                <button class="popup-btn" id="confirmBtn" style="background: #e63946; color: white;">Yes,
+                    Logout</button>
+                <button class="popup-btn cancel" id="cancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="JavaScripts/notifications_center.js"></script>
+    <script src="JavaScripts/forceBackToHome.js"></script>
+</body>
+
+</html>

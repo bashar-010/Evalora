@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+    <title>Manage Opportunities</title>
+    <link rel="stylesheet" href="managesopport.css">
+    <link rel="stylesheet" href="custom-alert.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Manage Opportunities</h1>
+
+        <div class="filters">
+            <select id="filterType" onchange="applyFilters()">
+                <option value="">All Types</option>
+                <option value="Internship">Internship</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Contract">Contract</option>
+            </select>
+
+            <select id="filterProvider" onchange="applyFilters()">
+                <option value="">All Providers</option>
+                <option value="TechCorp">TechCorp</option>
+                <option value="InnovateLabs">InnovateLabs</option>
+                <option value="StartupHub">StartupHub</option>
+                <option value="GlobalTech">GlobalTech</option>
+            </select>
+
+            <select id="filterLocation" onchange="applyFilters()">
+                <option value="">All Locations</option>
+                <option value="Amman">Amman</option>
+                <option value="Irbid">Irbid</option>
+                <option value="Balqaa">Balqaa</option>
+                <option value="Al-zarqa">Al-zarqa</option>
+            </select>
+
+            <select id="filterStatus" onchange="applyFilters()">
+                <option value="">All Statuses</option>
+                <option value="ON-SITE">ON-SITE</option>
+                <option value="REMOTE">REMOTE</option>
+                <option value="HYBRID">HYBRID</option>
+            </select>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Provider</th>
+                        <th>Type</th>
+                        <th>Location</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="opportunitiesTable">
+                    <!-- Opportunities will be inserted here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="add-opportunity-container">
+            <button id="addOppBtn" class="add-btn" style="display: none;" onclick="openModal()">Add
+                Opportunity</button>
+        </div>
+
+        <!-- Modal -->
+        <div id="opportunityModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Add Opportunity</h2>
+                    <button class="close-btn" onclick="closeModal()">&times;</button>
+                </div>
+                <form id="opportunityForm">
+                    <input type="hidden" id="opportunityId">
+
+                    <div class="form-group">
+                        <label for="title">Title *</label>
+                        <input type="text" id="title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="provider">Provider *</label>
+                        <input type="text" id="provider" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Type *</label>
+                        <select id="type" required>
+                            <option value="">Select Type</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Contract">Contract</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Duration (e.g., 3 Months)</label>
+                        <input type="text" id="duration" placeholder="e.g. 3 Months">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="location">Location *</label>
+                        <select id="location" required>
+                            <option value="">Select Location</option>
+                            <option value="Amman">Amman</option>
+                            <option value="Irbid">Irbid</option>
+                            <option value="Balqaa">Balqaa</option>
+                            <option value="Al-zarqa">Al-zarqa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline">Deadline *</label>
+                        <input type="date" id="deadline" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status *</label>
+                        <select id="status" required>
+                            <option value="">Select Status</option>
+                            <option value="ON-SITE">ON-SITE</option>
+                            <option value="REMOTE">REMOTE</option>
+                            <option value="HYBRID">HYBRID</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea id="description" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requirements">Requirements / Skills (comma separated)</label>
+                        <textarea id="requirements" placeholder="e.g. HTML, CSS, JavaScript"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="responsibilities">Responsibilities (comma separated)</label>
+                        <textarea id="responsibilities" placeholder="e.g. Develop UI, Write tests"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="btn-submit">Save Opportunity</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="js/custom-alert.js"></script>
+        <script src="js/api.js"></script>
+        <script src="JavaScripts/managesopport.js"></script>
+        <script src="JavaScripts/forceBackToHome.js"></script>
+</body>
+
+</html>

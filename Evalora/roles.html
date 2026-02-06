@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles & Permissions - Evalora</title>
+    <link rel="stylesheet" href="roles.css">
+    <link rel="stylesheet" href="custom-alert.css">
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav class="nav-menu">
+            <!-- Updated General button to link to index.html -->
+            <a href="settings.html" class="nav-item" data-section="general">
+                <img src="photos/settingg.svg" alt="settings" width="25px">
+                General
+            </a>
+            <!-- Updated Roles button to link to roles.html -->
+            <a href="roles.html" class="nav-item active" data-section="roles">
+                <img src="photos/roles.png" alt="" width="25px">
+                Roles
+            </a>
+            <a href="notifications.html" class="nav-item" data-section="notifications">
+                <img src="photos/notificationnn.png" alt="" width="25px">
+                Notifications
+            </a>
+            <a href="logs.html" class="nav-item" data-section="logs">
+                <img src="photos/logs.svg" alt="" width="25px">
+                Logs
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="account.html" class="nav-item" data-section="account">
+                <img src="photos/account.png" alt="" width="25px">
+                Account
+            </a>
+            <button class="nav-item logout" id="logoutBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                Logout
+            </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1 class="page-title">Roles & Permissions</h1>
+
+        <section class="admin-section">
+            <h2 class="section-title">Admin Accounts</h2>
+
+            <div class="table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        <tr data-id="1">
+                            <td>
+                                <div class="user-info">
+                                    <svg class="user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                    <div>
+                                        <div class="user-name">Reem</div>
+                                        <div class="user-email">@example.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="role-badge super-admin">Super Admin</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit-btn" title="Edit" onclick="editUser(1)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                        </svg>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete" onclick="deleteUser(1)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3 6 5 6 21 6" />
+                                            <path
+                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-id="2">
+                            <td>
+                                <div class="user-info">
+                                    <svg class="user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                    <div>
+                                        <div class="user-name">Sara</div>
+                                        <div class="user-email">@example.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="role-badge moderator">Moderator</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit-btn" title="Edit" onclick="editUser(2)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                        </svg>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete" onclick="deleteUser(2)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3 6 5 6 21 6" />
+                                            <path
+                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-id="3">
+                            <td>
+                                <div class="user-info">
+                                    <svg class="user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                    <div>
+                                        <div class="user-name">Bashar</div>
+                                        <div class="user-email">@example.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="role-badge moderator">Moderator</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit-btn" title="Edit" onclick="editUser(3)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                        </svg>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete" onclick="deleteUser(3)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3 6 5 6 21 6" />
+                                            <path
+                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="add-role-container">
+                <button class="add-role-btn" id="addRoleBtn">
+                    <svg class="plus-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Add Role
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Add Role Modal -->
+    <div class="modal" id="addRoleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Admin</h3>
+                <button class="close-btn" onclick="closeModal('addRoleModal')">&times;</button>
+            </div>
+            <form id="addRoleForm">
+                <div class="form-group">
+                    <label for="userName">Name</label>
+                    <input type="text" id="userName" name="userName" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input type="email" id="userEmail" name="userEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPassword">Password</label>
+                    <input type="password" id="userPassword" name="userPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="userRole">Role</label>
+                    <select id="userRole" name="userRole" required>
+                        <option value="">Select a role</option>
+                        <option value="admin">admin</option>
+                        <option value="user">user</option>
+                        <option value="company">company</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="userStatus">Status</label>
+                    <select id="userStatus" name="userStatus" required>
+                        <option value="active">Active</option>
+                        <option value="suspended">Suspended</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('addRoleModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Role Modal -->
+    <div class="modal" id="editRoleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Admin</h3>
+                <button class="close-btn" onclick="closeModal('editRoleModal')">&times;</button>
+            </div>
+            <form id="editRoleForm">
+                <input type="hidden" id="editUserId">
+                <div class="form-group">
+                    <label for="editUserName">Name</label>
+                    <input type="text" id="editUserName" name="editUserName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editUserEmail">Email</label>
+                    <input type="email" id="editUserEmail" name="editUserEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editUserRole">Role</label>
+                    <select id="editUserRole" name="editUserRole" required>
+                        <option value="admin">admin</option>
+                        <option value="user">user</option>
+                        <option value="company">company</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editUserStatus">Status</label>
+                    <select id="editUserStatus" name="editUserStatus" required>
+                        <option value="active">Active</option>
+                        <option value="suspended">Suspended</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('editRoleModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="js/custom-alert.js"></script>
+    <script src="js/api.js"></script>
+    <script src="JavaScripts/roles.js"></script>
+    <script src="JavaScripts/forceBackToHome.js"></script>
+</body>
+
+</html>

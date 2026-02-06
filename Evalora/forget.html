@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+  <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="navbar-left">
+      <img src="photos/Evaloralogo.png" alt="Evalora logo" width="70px">
+    </div>
+
+    <div class="navbar-center">
+      <a href="index.html">Home</a>
+      <a href="login.html">Profile</a>
+      <a href="opport(without acc).html">Opportunities</a>
+      <a href="index.html#about-section">About</a>
+
+    </div>
+
+    <div class="navbar-right">
+      <a href="sendcode.html">
+        <button class="nav-login active-btn">Login</button></a>
+    </div>
+  </div>
+
+  <div class="Background-image">
+
+    <div class="forget-container">
+      <div class="forget-box">
+
+        <h2>Forget Your Password?</h2>
+
+        <h5>Enter your email address and we will send you a verification code to reset your password.</h5>
+        <input type="email" id="email" placeholder="Enter your email">
+        <button class="forget-btn" onclick="sendResetCode()">Continue</button>
+        <p id="message" style="color: red; margin-top: 10px;"></p>
+
+        <script>
+          async function sendResetCode() {
+            const email = document.getElementById('email').value;
+            const messageEl = document.getElementById('message');
+
+            if (!email) {
+              messageEl.innerText = "Please enter your email";
+              return;
+            }
+
+            messageEl.innerText = "Sending...";
+            messageEl.style.color = "blue";
+
+            try {
+              const res = await fetch('http://localhost:5000/api/users/forgot-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+              });
+
+              const data = await res.json();
+
+              if (res.ok) {
+                localStorage.setItem('resetEmail', email);
+                window.location.href = 'sendcode.html';
+              } else {
+                messageEl.innerText = data.message;
+                messageEl.style.color = "red";
+              }
+            } catch (err) {
+              console.error(err);
+              messageEl.innerText = "Something went wrong. Try again.";
+              messageEl.style.color = "red";
+            }
+          }
+        </script>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+
+    <div class="footer-content">
+
+      <div class="footer-left">
+        <h3>Quick links</h3>
+        <ul>
+          <li><a href="index.html#about-section">About</a></li>
+          <li><a href="opport(without acc).html">Opportunities</a></li>
+          <li><a href="FAQ.html">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-right">
+        <h3>Evalora</h3>
+        <img src="photos/Evaloralogo.png" alt="Evalora Logo" width="70px">
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Evalora. All Rights Reserved.</p>
+    </div>
+
+  </footer>
+
+</body>
+
+</html>

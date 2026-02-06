@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="photos/Evaloralogo.png">
+    <title>Manage Projects</title>
+    <link rel="stylesheet" href="managesproject.css">
+    <link rel="stylesheet" href="custom-alert.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Manage Projects</h1>
+
+        <div class="filters">
+            <div class="search-box">
+                <input type="text" class="search-input" id="studentSearch" placeholder="Search by student name..."
+                    oninput="filterProjects()">
+            </div>
+            <select class="filter-select" id="skillsFilter" onchange="filterProjects()">
+                <option value="">All Skills</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="React">React</option>
+                <option value="Angular">Angular</option>
+                <option value="Vue.js">Vue.js</option>
+                <option value="Node.js">Node.js</option>
+                <option value="Express.js">Express.js</option>
+                <option value="Python">Python</option>
+                <option value="Django">Django</option>
+                <option value="Flask">Flask</option>
+                <option value="Java">Java</option>
+                <option value="Spring Boot">Spring Boot</option>
+                <option value="C++">C++</option>
+                <option value="C#">C#</option>
+                <option value=".NET">.NET</option>
+                <option value="PHP">PHP</option>
+                <option value="Laravel">Laravel</option>
+                <option value="Ruby">Ruby</option>
+                <option value="Ruby on Rails">Ruby on Rails</option>
+                <option value="MongoDB">MongoDB</option>
+                <option value="MySQL">MySQL</option>
+                <option value="PostgreSQL">PostgreSQL</option>
+                <option value="SQL Server">SQL Server</option>
+                <option value="Firebase">Firebase</option>
+                <option value="AWS">AWS</option>
+                <option value="Azure">Azure</option>
+                <option value="Google Cloud">Google Cloud</option>
+                <option value="Docker">Docker</option>
+                <option value="Kubernetes">Kubernetes</option>
+                <option value="Git">Git</option>
+                <option value="GitHub">GitHub</option>
+                <option value="REST API">REST API</option>
+                <option value="GraphQL">GraphQL</option>
+                <option value="TypeScript">TypeScript</option>
+                <option value="Redux">Redux</option>
+                <option value="Next.js">Next.js</option>
+                <option value="Tailwind CSS">Tailwind CSS</option>
+                <option value="Bootstrap">Bootstrap</option>
+                <option value="Material-UI">Material-UI</option>
+                <option value="Flutter">Flutter</option>
+                <option value="React Native">React Native</option>
+                <option value="Swift">Swift</option>
+                <option value="Kotlin">Kotlin</option>
+                <option value="Android">Android</option>
+                <option value="iOS">iOS</option>
+                <option value="Machine Learning">Machine Learning</option>
+                <option value="Deep Learning">Deep Learning</option>
+                <option value="TensorFlow">TensorFlow</option>
+                <option value="PyTorch">PyTorch</option>
+                <option value="Data Science">Data Science</option>
+                <option value="Pandas">Pandas</option>
+                <option value="NumPy">NumPy</option>
+                <option value="Scikit-learn">Scikit-learn</option>
+            </select>
+            <select class="filter-select" id="statusFilter" onchange="filterProjects()">
+                <option value="">All Status</option>
+                <option value="Scored">Scored</option>
+                <option value="Approved">Approved</option>
+                <option value="Needs Change">Needs Change</option>
+                <option value="Rejected">Rejected</option>
+                <option value="awaiting_company_verification">Awaiting Company Verification</option>
+            </select>
+            <select class="filter-select" id="companyVerificationFilter" onchange="filterProjects()">
+                <option value="">All Verification Status</option>
+                <option value="not_applicable">No Company</option>
+                <option value="pending_verification">Pending Verification</option>
+                <option value="verified">Verified</option>
+                <option value="rejected">Rejected by Company</option>
+            </select>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project Title</th>
+                            <th>Student</th>
+                            <th>Date</th>
+                            <th>Skills</th>
+                            <th>Status</th>
+                            <th>Company</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectsTable">
+                        <!-- Projects will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="details-panel" id="detailsPanel">
+                <div class="no-selection">
+                    Select a project to view details
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/custom-alert.js"></script>
+    <script src="js/api.js"></script>
+    <script src="JavaScripts/managesproject.js"></script>
+    <script src="JavaScripts/forceBackToHome.js"></script>
+</body>
+
+</html>

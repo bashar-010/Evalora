@@ -1,0 +1,347 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    min-height: 100vh;
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.logo h1 {
+    color: #83c8c8;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+.content {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 20px;
+    border: 4px solid rgba(131, 200, 200, 0.2);
+    border-top-color: #83c8c8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error State */
+.error-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.error-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.error-state h2 {
+    color: #f44336;
+    margin-bottom: 10px;
+}
+
+.error-state p {
+    color: #999;
+}
+
+/* Success State */
+.success-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: #4caf50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+}
+
+.success-state h2 {
+    color: #4caf50;
+    margin-bottom: 10px;
+}
+
+.success-state p {
+    color: #bbb;
+}
+
+/* Verification Form */
+.verification-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.verification-header h2 {
+    color: #83c8c8;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.verification-header p {
+    color: #bbb;
+    font-size: 1rem;
+}
+
+/* Project Details */
+.project-details {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-details h3 {
+    color: #83c8c8;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-row .label {
+    color: #999;
+    font-weight: 500;
+}
+
+.detail-row .value {
+    color: #fff;
+    font-weight: 600;
+}
+
+.detail-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detail-section .label {
+    color: #999;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #ddd;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.repo-link {
+    color: #83c8c8;
+    text-decoration: none;
+    padding: 8px 16px;
+    background: rgba(131, 200, 200, 0.1);
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.repo-link:hover {
+    background: rgba(131, 200, 200, 0.2);
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech-tag {
+    background: rgba(131, 200, 200, 0.1);
+    color: #83c8c8;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(131, 200, 200, 0.2);
+}
+
+/* Verification Actions */
+.verification-actions h3 {
+    color: #83c8c8;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.feedback-section,
+.score-section {
+    margin-bottom: 25px;
+}
+
+.feedback-section label,
+.score-section label {
+    display: block;
+    color: #bbb;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.feedback-section textarea {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.feedback-section textarea:focus {
+    outline: none;
+    border-color: #83c8c8;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.score-section input {
+    width: 100%;
+    max-width: 200px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.score-section input:focus {
+    outline: none;
+    border-color: #83c8c8;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.score-section small {
+    display: block;
+    color: #888;
+    margin-top: 8px;
+    font-size: 0.85rem;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-verify {
+    background: #4caf50;
+    color: white;
+}
+
+.btn-verify:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.btn-reject {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+    border: 2px solid #f44336;
+}
+
+.btn-reject:hover {
+    background: #f44336;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
